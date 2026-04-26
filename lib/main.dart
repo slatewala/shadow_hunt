@@ -99,11 +99,16 @@ class _GamePageState extends State<GamePage> {
             child: Center(
               child: AspectRatio(
                 aspectRatio: 1,
-                child: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 120),
-                  opacity: _showing ? 1.0 : 0.0,
-                  child: CustomPaint(
-                    painter: _ShapePainter(_target, const Color(0xFF000000)),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 120),
+                    opacity: _showing ? 1.0 : 0.0,
+                    child: SizedBox.expand(
+                      child: CustomPaint(
+                        painter: _ShapePainter(_target, const Color(0xFFFFFFFF)),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -111,11 +116,12 @@ class _GamePageState extends State<GamePage> {
           ),
           // 4 choices
           Expanded(
-            flex: 3,
+            flex: 4,
             child: GridView.count(
               crossAxisCount: 2,
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(16),
               mainAxisSpacing: 14, crossAxisSpacing: 14,
+              childAspectRatio: 1,
               children: _choices.map((k) =>
                 GestureDetector(
                   onTap: _gameOver
@@ -127,9 +133,11 @@ class _GamePageState extends State<GamePage> {
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: const Color(0xFFE94560), width: 2),
                     ),
-                    padding: const EdgeInsets.all(14),
-                    child: CustomPaint(
-                      painter: _ShapePainter(k, const Color(0xFFE94560)),
+                    padding: const EdgeInsets.all(18),
+                    child: SizedBox.expand(
+                      child: CustomPaint(
+                        painter: _ShapePainter(k, const Color(0xFFE94560)),
+                      ),
                     ),
                   ),
                 ),
